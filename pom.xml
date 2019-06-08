@@ -12,7 +12,7 @@
 	<artifactId>livros</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>livros</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Projeto Biblioteca Pós</description>
 
 	<properties>
 		<java.version>1.8</java.version>
