@@ -1,6 +1,9 @@
 package br.biblioteca.livros.controllers;
 
 import br.biblioteca.livros.entidades.Livro;
+import br.biblioteca.livros.repository.AutorRepository;
+import br.biblioteca.livros.repository.LivroRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,9 +14,22 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping ("/livros")
 public class LivroController {
 
+    @Autowired
+    private LivroRepository livroRepository;
+
+    @Autowired
+    private AutorRepository autorRepository;
+
     @GetMapping("/list")
     public ModelAndView list() {
-        return new ModelAndView("/livros/list");
+//        Livro livro = new Livro();
+
+//        livro.setNome("Rodolfo");
+//        livro.setQuantidadePaginas(3);
+//        this.livroRepository.save(livro);
+//
+        Iterable<Livro> livros = livroRepository.findAll();
+        return new ModelAndView( "/livros/list" , "listaLivros" , livros );
     }
 
     @GetMapping("/novo")
