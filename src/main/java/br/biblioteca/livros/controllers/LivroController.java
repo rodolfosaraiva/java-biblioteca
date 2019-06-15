@@ -4,9 +4,11 @@ import br.biblioteca.livros.entidades.Livro;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
+@RequestMapping ("/livros")
 public class LivroController {
 
     @GetMapping("/list")
@@ -16,7 +18,7 @@ public class LivroController {
 
     @GetMapping("/novo")
     public ModelAndView newBook() {
-        return new ModelAndView("/livros/livro");
+        return new ModelAndView("/livros/form");
     }
 
     @PostMapping(value = "/gravar")
