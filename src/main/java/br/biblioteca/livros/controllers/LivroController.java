@@ -28,6 +28,8 @@ public class LivroController {
 //        livro.setQuantidadePaginas(3);
 //        this.livroRepository.save(livro);
 
+//        System.out.println(livroRepository.getOne(1l));
+
         Iterable<Livro> livros = livroRepository.findAll();
         return new ModelAndView( "/livros/list" , "listaLivros" , livros );
     }
