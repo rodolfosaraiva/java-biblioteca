@@ -23,11 +23,11 @@ public class LivroController {
     @GetMapping("/list")
     public ModelAndView list() {
 //        Livro livro = new Livro();
-
+//
 //        livro.setNome("Rodolfo");
 //        livro.setQuantidadePaginas(3);
 //        this.livroRepository.save(livro);
-//
+
         Iterable<Livro> livros = livroRepository.findAll();
         return new ModelAndView( "/livros/list" , "listaLivros" , livros );
     }
