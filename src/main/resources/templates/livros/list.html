@@ -9,24 +9,23 @@
 <body>
 
 <h1 layout:fragment="header">
-    <a th:href="@{/livros/novo}"  class="btn btn-sm btn-info"><i class="glyphicon glyphicon-plus"></i></a>
     Livros
+    <a th:href="@{/livros/novo}"  class="btn btn-sm btn-info pull-right"><i class="glyphicon glyphicon-plus"></i> Novo livro</a>
 </h1>
 
 <div layout:fragment="content" class="container">
     <table class="table">
         <thead>
         <tr>
-            <th scope="col">ID</td>
+            <th scope="col" width="100">ID</td>
             <th scope="col">Título</td>
-            <th scope="col">Ações</td>
+            <th scope="col" width="200">Ações</td>
         </tr>
         </thead>
         <tbody>
         <tr th:each="livro : ${listaLivros}">
             <th scope="row" th:text="${livro.id}">1</th>
             <td><a href="#" th:href="@{'/livros/'+${livro.id}}" th:text="${livro.nome}"> Título </a></td>
-            <td></td>
             <td>
                 <a href="#" th:href="@{'/livros/alterar/'+${livro.id}}" class="btn btn-primary"> Altera </a>
                 <a href="#" th:href="@{'/livros/excluir/'+${livro.id}}" class="btn btn-danger"> Excluir </a>

@@ -9,17 +9,17 @@
 <body>
 
 <h1 layout:fragment="header">
-    <a th:href="@{/autores/novo}"  class="btn btn-sm btn-info"><i class="glyphicon glyphicon-plus"></i></a>
     Autores
+    <a th:href="@{/autores/novo}"  class="btn btn-sm btn-info pull-right"><i class="glyphicon glyphicon-plus"></i> Novo autor</a>
 </h1>
 
 <div layout:fragment="content" class="container">
     <table class="table">
         <thead>
         <tr>
-            <th>ID
+            <th width="100">ID
             <th>Autor</th>
-            <th>Ações</th>
+            <th width="200">Ações</th>
         </tr>
         </thead>
         <tbody>
