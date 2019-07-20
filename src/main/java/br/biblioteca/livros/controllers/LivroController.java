@@ -26,7 +26,7 @@ public class LivroController {
     public ModelAndView list() {
         Iterable<Livro> livros = livroService.listaLivros();
 
-        return new ModelAndView( "/livros/list" , "listaLivros" , livros );
+        return new ModelAndView( "livros/list" , "listaLivros" , livros );
     }
 
     @GetMapping("/novo")
