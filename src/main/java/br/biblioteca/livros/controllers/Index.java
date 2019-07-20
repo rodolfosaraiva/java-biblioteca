@@ -12,9 +12,4 @@ public class Index {
     public ModelAndView home() {
         return new ModelAndView("index");
     }
-
-//    @PostMapping(value = "/gravar")
-//    public ModelAndView create(Livro livro) {
-//        return new ModelAndView("redirect:/livros/list");
-//    }
 }
