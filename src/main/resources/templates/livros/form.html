@@ -5,9 +5,16 @@
     <title>Livros</title>
 </head>
 <body>
-<form method="post" action="/livros/gravar">
-    Nome: <input type="text" name="nome">
-    Quantidade Páginas: <input type="text" name="quantidadePaginas">
+<form method="post" action="/livros/gravar" th:object="${livro}">
+    <input type="hidden"  th:field="*{id}" />
+    Nome: <input type="text" name="nome"  th:field="*{nome}" >
+    Quantidade Páginas: <input type="text" name="quantidadePaginas" th:field="*{quantidadePaginas}">
+
+    <select th:object="${livro}" th:field="*{autor}">
+        <option value="">Selecione o Autor</option>
+        <option th:each="autor : ${autores}" th:value="${autor.id}" th:utext="${autor.nome} " selected="selected"></option>
+    </select>
+
     <input type="submit">
 </form>
 

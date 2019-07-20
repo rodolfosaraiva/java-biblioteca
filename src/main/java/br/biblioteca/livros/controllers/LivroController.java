@@ -1,13 +1,12 @@
 package br.biblioteca.livros.controllers;
 
+import br.biblioteca.livros.entidades.Autor;
 import br.biblioteca.livros.entidades.Livro;
-import br.biblioteca.livros.repository.AutorRepository;
-import br.biblioteca.livros.repository.LivroRepository;
+import br.biblioteca.livros.services.AutoresService;
+import br.biblioteca.livros.services.LivroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -15,42 +14,45 @@ import org.springframework.web.servlet.ModelAndView;
 public class LivroController {
 
     @Autowired
-    private LivroRepository livroRepository;
+    private LivroService livroService;
 
     @Autowired
-    private AutorRepository autorRepository;
+    private AutoresService autorService;
 
     @GetMapping("/list")
     public ModelAndView list() {
-//        Livro livro = new Livro();
-//
-//        livro.setNome("Rodolfo");
-//        livro.setQuantidadePaginas(3);
-//        this.livroRepository.save(livro);
+        Iterable<Livro> livros = livroService.listaLivros();
 
-//        System.out.println(livroRepository.getOne(1l));
-
-        Iterable<Livro> livros = livroRepository.findAll();
         return new ModelAndView( "/livros/list" , "listaLivros" , livros );
     }
 
     @GetMapping("/novo")
-    public ModelAndView newBook() {
-        return new ModelAndView("/livros/form");
+    public ModelAndView newBook(@ModelAttribute Livro livro) {
+        ModelAndView modelAndView = new ModelAndView("livros/form");
+        Iterable<Autor> autores = autorService.listaAutores();
+        modelAndView.addObject("autores", autores);
+        return modelAndView;
     }
 
     @PostMapping(value = "/gravar")
     public ModelAndView create(Livro livro) {
+        livroService.gravaLivro(livro);
         return new ModelAndView("redirect:/livros/list");
     }
 
     @GetMapping("/alterar/{id}")
-    public ModelAndView update() {
-        return new ModelAndView("redirect:/livros/list");
+    public ModelAndView update(@PathVariable Long id, @ModelAttribute Livro livro) {
+        ModelAndView modelAndView = new ModelAndView("livros/form");
+        Iterable<Autor> autores = autorService.listaAutores();
+        Livro livroFind = livroService.getFirstLivro(id);
+        modelAndView.addObject("autores", autores);
+        modelAndView.addObject("livro", livroFind);
+        return modelAndView;
     }
 
     @GetMapping("/excluir/{id}")
-    public ModelAndView delete() {
+    public ModelAndView delete(@PathVariable Long id) {
+        livroService.apagarLivro(id);
         return new ModelAndView("redirect:/livros/list");
     }
 
