@@ -59,14 +59,14 @@ public class UserControllers {
 
 	@GetMapping("/list")
 	public ModelAndView list() {
-		return new ModelAndView("/user/list");
+		return new ModelAndView("user/list");
 	}
 
 	@GetMapping("/listadmin")
 	public ModelAndView listadmin(User user) {
 
 		List<User> users = userService.findAll();
-		return new ModelAndView("/user/listadmin","users",users);
+		return new ModelAndView("user/listadmin","users",users);
 	}
 
 	@GetMapping(value = "/registration")
